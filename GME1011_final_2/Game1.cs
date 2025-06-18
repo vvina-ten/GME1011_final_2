@@ -16,6 +16,9 @@ namespace GME1011_final_2
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            _graphics.PreferredBackBufferWidth = 1500;
+            _graphics.PreferredBackBufferHeight = 700;
         }
 
         protected override void Initialize()
@@ -30,7 +33,7 @@ namespace GME1011_final_2
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            zombie = new Zombie(Content.Load<Texture2D>("zombie_2"),0,0);
+            zombie = new Zombie(Content.Load<Texture2D>("zombie_2"),1500,10);
 
 
         }
