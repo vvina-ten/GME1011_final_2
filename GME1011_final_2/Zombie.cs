@@ -11,7 +11,6 @@ namespace GME1011_final_2
         private float _movespeed;
         private bool _isalive;
         private int _health;
-        private SpriteFont _gamefont;
 
         public Zombie(Texture2D zombie, int x, int y,float movespeed,int health)
         {
@@ -39,8 +38,8 @@ namespace GME1011_final_2
 
             spriteBatch.Draw(_zombie, _position, null, Color.White, 0f, Vector2.Zero, new Vector2(0.1f, 0.1f), 0, 0f);
 
-            Vector2 healthloc = new Vector2(_position.X - 10, _position.Y + 10);
-            spriteBatch.DrawString(_gamefont,"health: " + _health, healthloc,Color.BurlyWood);
+            Vector2 healthloc = new Vector2(_position.X + 25, _position.Y - 22);
+            spriteBatch.DrawString(font,"health: " + _health, healthloc,Color.BurlyWood);
 
             spriteBatch.End();
 
@@ -50,7 +49,7 @@ namespace GME1011_final_2
 
         public Rectangle GetBounds()
         { 
-            return new Rectangle((int)_position.X,(int)_position.Y,_zombie.Width, (int)_zombie.Height);
+            return new Rectangle((int)_position.X,(int)_position.Y,(int)(_zombie.Width*0.1f), (int)(_zombie.Height*0.1f));
         }
 
 
