@@ -8,29 +8,39 @@ namespace GME1011_final_2
         private Texture2D _zombie;
         private Vector2 _position;
 
-        private float _scale;
         private float _movespeed;
+        private bool _isalive;
+        private int _health;
+        private SpriteFont _gamefont;
 
-
-        public Zombie(Texture2D zombie, int x, int y)
+        public Zombie(Texture2D zombie, int x, int y,float movespeed,int health)
         {
             _zombie = zombie;
             _position = new Vector2(x,y);
-            _movespeed = 5f;
-
+            _movespeed = movespeed;
+            _isalive = true;
+            _health = health;
         }
 
         public void Update()
         {
-            _position.X -= _movespeed;
+            if (_isalive)
+            {
+                _position.X -= _movespeed;
+            }
+            
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        
+        public void Draw(SpriteBatch spriteBatch,SpriteFont font)
         {
    
             spriteBatch.Begin();
 
-            spriteBatch.Draw(_zombie, _position, null, Color.White, 0f, Vector2.Zero, new Vector2(0.1f, 0.1f), SpriteEffects.None, 0f);
+            spriteBatch.Draw(_zombie, _position, null, Color.White, 0f, Vector2.Zero, new Vector2(0.1f, 0.1f), 0, 0f);
+
+            Vector2 healthloc = new Vector2(_position.X - 10, _position.Y + 10);
+            spriteBatch.DrawString(_gamefont,"health: " + _health, healthloc,Color.BurlyWood);
 
             spriteBatch.End();
 

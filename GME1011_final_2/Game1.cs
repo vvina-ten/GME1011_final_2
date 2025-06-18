@@ -8,6 +8,7 @@ namespace GME1011_final_2
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private SpriteFont _gamefont;
 
         Zombie zombie;
 
@@ -33,7 +34,9 @@ namespace GME1011_final_2
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            zombie = new Zombie(Content.Load<Texture2D>("zombie_2"),1500,10);
+            _gamefont = Content.Load<SpriteFont>("GameFont");
+
+            zombie = new Zombie(Content.Load<Texture2D>("zombie_2"),1500,10,2f,5);
 
 
         }
@@ -52,11 +55,11 @@ namespace GME1011_final_2
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
 
-            zombie.Draw(_spriteBatch);
+            zombie.Draw(_spriteBatch,_gamefont);
 
             base.Draw(gameTime);
         }
