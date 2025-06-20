@@ -45,9 +45,9 @@ namespace GME1011_final_2
             _gamefont = Content.Load<SpriteFont>("GameFont");
 
             zombie1 = new Zombie(Content.Load<Texture2D>("zombie_2"),1450,50,2f,10);
-            zombie2 = new Zombie(Content.Load<Texture2D>("zombie_2"), 1550, 180, 2f, 10);
-            zombie3 = new Zombie(Content.Load<Texture2D>("zombie_2"), 1620, 310, 2f, 10);
-            zombie4 = new Zombie(Content.Load<Texture2D>("zombie_2"), 1720, 450, 2f, 10);
+            zombie2 = new Zombie(Content.Load<Texture2D>("zombie_2"), 1850, 220, 2f, 10);
+            zombie3 = new Zombie(Content.Load<Texture2D>("zombie_2"), 2120, 380, 2f, 10);
+            zombie4 = new Zombie(Content.Load<Texture2D>("zombie_2"), 2520, 500, 2f, 10);
             //   powerzombie = new Powerzombie(Content.Load<Texture2D>("zombie_3"), 1450, 100, 2f, 10);
 
         }
@@ -58,6 +58,24 @@ namespace GME1011_final_2
                 Exit();
 
             // TODO: Add your update logic here
+
+
+            if (!zombie1.IsAlive() || zombie1.GetX() < -100)
+            {
+                zombie1 = new Zombie(Content.Load<Texture2D>("zombie_2"), 1450, 50, 2f, 10);
+            }
+            if (!zombie2.IsAlive() || zombie2.GetX() < -100)
+            {
+                zombie2 = new Zombie(Content.Load<Texture2D>("zombie_2"), 1850, 220, 2f, 10);
+            }
+            if (!zombie3.IsAlive() || zombie3.GetX() < -100)
+            {
+                zombie3 = new Zombie(Content.Load<Texture2D>("zombie_2"), 2120, 380, 2f, 10);
+            }
+            if (!zombie4.IsAlive() || zombie4.GetX() < -100)
+            {
+                zombie4 = new Zombie(Content.Load<Texture2D>("zombie_2"), 2520, 500, 2f, 10);
+            }
 
 
             if (zombie1.IsAlive())
