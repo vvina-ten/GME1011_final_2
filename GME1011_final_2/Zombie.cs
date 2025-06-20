@@ -5,14 +5,13 @@ namespace GME1011_final_2
 {
     internal class Zombie
     {
-        private Texture2D _zombie;
-        private Vector2 _position;
-
-        private float _movespeed;
-        private bool _isalive;
-        private int _health;
-        private float _cooldowntimer;
-        private bool _remove;
+        protected Texture2D _zombie;
+        protected Vector2 _position;
+        protected float _movespeed;
+        protected bool _isalive;
+        protected int _health;
+        protected float _cooldowntimer;
+        public bool _remove;
 
         public Zombie(Texture2D zombie, int x, int y,float movespeed,int health)
         {
@@ -46,19 +45,19 @@ namespace GME1011_final_2
                         _health -= 1;
                         _cooldowntimer = 20f;
                     }
+                }
 
-                    if (_health <= 0)
-                    { 
-                        _isalive = false;
-                        _remove = true;
-                    }
+                if (_health <= 0)
+                {
+                    _isalive = false;
+                    _remove = true;
                 }
             }
         }
 
         
 
-        public void Draw(SpriteBatch spriteBatch,SpriteFont font)
+        public virtual void Draw(SpriteBatch spriteBatch,SpriteFont font)
         {
             if (_remove)
             {
@@ -86,21 +85,19 @@ namespace GME1011_final_2
         }
 
         public bool IsAlive()
-        {
-            return _isalive;
-        }
+            { return _isalive; }
 
         public float GetX()
-        { 
-            return _position.X; 
-        }
+            { return _position.X; }
 
         public bool HasCounted()
-        {
-            return _position.X <= 1400 && _position.X >= 1400;
-        }
+            { return _position.X == 1400; }
 
+        public int Health()
+            { return _health; }
 
+        public Vector2 GetPosition()
+            { return _position; }
 
     }
 }
