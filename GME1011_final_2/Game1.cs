@@ -11,6 +11,7 @@ namespace GME1011_final_2
         private SpriteFont _gamefont;
 
         Zombie zombie;
+        private int _zombiecount;
 
         public Game1()
         {
@@ -25,6 +26,8 @@ namespace GME1011_final_2
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            
+            _zombiecount = 0;
 
             base.Initialize();
         }
@@ -48,8 +51,18 @@ namespace GME1011_final_2
 
             // TODO: Add your update logic here
 
-            zombie.Update();
+            if (zombie.IsAlive())
+            { 
+                zombie.Update();
 
+                if (zombie.GetX() <= 1400)
+                { _zombiecount++; }
+
+
+
+            }
+            
+            
             
 
             base.Update(gameTime);
@@ -62,6 +75,14 @@ namespace GME1011_final_2
             // TODO: Add your drawing code here
 
             zombie.Draw(_spriteBatch,_gamefont);
+
+            _spriteBatch.Begin();
+
+            _spriteBatch.DrawString(_gamefont,"Now there are " + _zombiecount + "zombies!", new Vector2(10,450), Color.Red);
+
+            
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

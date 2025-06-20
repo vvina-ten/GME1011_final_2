@@ -12,7 +12,8 @@ namespace GME1011_final_2
         private bool _isalive;
         private int _health;
         private float _cooldowntimer;
-
+        private int _zombiecount;
+        private bool _remove;
         public Zombie(Texture2D zombie, int x, int y,float movespeed,int health)
         {
             _zombie = zombie;
@@ -21,6 +22,8 @@ namespace GME1011_final_2
             _isalive = true;
             _health = health;
             _cooldowntimer = 0;
+            _remove = false;
+
         }
 
         public void Update()
@@ -29,44 +32,55 @@ namespace GME1011_final_2
             {
                 _position.X -= _movespeed;
 
-                if (_cooldowntimer >=0)
-                { _cooldowntimer--; }
+                if (_cooldowntimer >= 0)
+                { 
+                    _cooldowntimer--;
+                    _zombiecount++;
+                }
 
                 MouseState currentMouseState = Mouse.GetState();
 
 
-                if (currentMouseState.LeftButton == ButtonState.Pressed &&_cooldowntimer <= 0 )
+                if (currentMouseState.LeftButton == ButtonState.Pressed && _cooldowntimer <= 0)
                 {
                     if (GetBounds().Contains(currentMouseState.Position))
                     {
                         _health -= 1;
                         _cooldowntimer = 20f;
                     }
+
+                    if (_health <= 0)
+                    { 
+                        _isalive = false;
+                        _remove = true;
+                    }
                 }
 
             }
-
-            if (_health <=0) 
-            { 
-                _isalive = false;
-                
-            }
+           
+            
         }
 
         
         public void Draw(SpriteBatch spriteBatch,SpriteFont font)
         {
-   
-            spriteBatch.Begin();
+            if (_remove)
+            {
+                return;
+            }
 
-            spriteBatch.Draw(_zombie, _position, null, Color.White, 0f, Vector2.Zero, new Vector2(0.1f, 0.1f), 0, 0f);
+            if (_isalive)
+            {
+                spriteBatch.Begin();
 
-            Vector2 healthloc = new Vector2(_position.X + 25, _position.Y - 22);
-            spriteBatch.DrawString(font,"health: " + _health, healthloc,Color.BurlyWood);
+                spriteBatch.Draw(_zombie, _position, null, Color.White, 0f, Vector2.Zero, new Vector2(0.1f, 0.1f), 0, 0f);
 
-            spriteBatch.End();
+                Vector2 healthloc = new Vector2(_position.X + 25, _position.Y - 22);
+                spriteBatch.DrawString(font, "health: " + _health, healthloc, Color.BurlyWood);
 
+                spriteBatch.End();
 
+            }
         }
 
 
@@ -75,9 +89,13 @@ namespace GME1011_final_2
             return new Rectangle((int)_position.X,(int)_position.Y,(int)(_zombie.Width*0.1f), (int)(_zombie.Height*0.1f));
         }
 
+        public bool IsAlive()
+        {
+            return _isalive;
+        }
 
-        
-
+        public float GetX()
+            { return _position.X; }
 
 
 
