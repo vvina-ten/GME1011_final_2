@@ -11,7 +11,7 @@ namespace GME1011_final_2
         private float _movespeed;
         private bool _isalive;
         private int _health;
-        private bool _mousepressed;
+        private float _cooldowntimer;
 
         public Zombie(Texture2D zombie, int x, int y,float movespeed,int health)
         {
@@ -20,7 +20,7 @@ namespace GME1011_final_2
             _movespeed = movespeed;
             _isalive = true;
             _health = health;
-            _mousepressed = false;
+            _cooldowntimer = 0;
         }
 
         public void Update()
@@ -28,21 +28,29 @@ namespace GME1011_final_2
             if (_isalive)
             {
                 _position.X -= _movespeed;
-            }
 
-            MouseState currentMouseState = Mouse.GetState();
+                if (_cooldowntimer >=0)
+                { _cooldowntimer--; }
+
+                MouseState currentMouseState = Mouse.GetState();
 
 
-            if (currentMouseState.LeftButton == ButtonState.Pressed )
-            {
-                if (GetBounds().Contains(currentMouseState.Position))
+                if (currentMouseState.LeftButton == ButtonState.Pressed &&_cooldowntimer <= 0 )
                 {
-                    _health -= 1;
-                    _mousepressed  = true;
+                    if (GetBounds().Contains(currentMouseState.Position))
+                    {
+                        _health -= 1;
+                        _cooldowntimer = 20f;
+                    }
                 }
+
             }
 
-
+            if (_health <=0) 
+            { 
+                _isalive = false;
+                
+            }
         }
 
         
@@ -68,7 +76,7 @@ namespace GME1011_final_2
         }
 
 
-
+        
 
 
 

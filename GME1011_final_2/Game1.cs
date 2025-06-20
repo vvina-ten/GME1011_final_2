@@ -36,7 +36,7 @@ namespace GME1011_final_2
             // TODO: use this.Content to load your game content here
             _gamefont = Content.Load<SpriteFont>("GameFont");
 
-            zombie = new Zombie(Content.Load<Texture2D>("zombie_2"),1450,50,2f,5);
+            zombie = new Zombie(Content.Load<Texture2D>("zombie_2"),1450,50,2f,10);
 
 
         }
@@ -49,6 +49,8 @@ namespace GME1011_final_2
             // TODO: Add your update logic here
 
             zombie.Update();
+
+            
 
             base.Update(gameTime);
         }
