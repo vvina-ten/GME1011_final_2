@@ -55,8 +55,10 @@ namespace GME1011_final_2
             { 
                 zombie.Update();
 
-                if (zombie.GetX() <= 1400)
-                { _zombiecount++; }
+                if (zombie.HasCounted())
+                { 
+                    _zombiecount++;
+                }
 
 
 

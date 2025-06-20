@@ -12,8 +12,8 @@ namespace GME1011_final_2
         private bool _isalive;
         private int _health;
         private float _cooldowntimer;
-        private int _zombiecount;
         private bool _remove;
+
         public Zombie(Texture2D zombie, int x, int y,float movespeed,int health)
         {
             _zombie = zombie;
@@ -23,7 +23,6 @@ namespace GME1011_final_2
             _health = health;
             _cooldowntimer = 0;
             _remove = false;
-
         }
 
         public void Update()
@@ -35,7 +34,6 @@ namespace GME1011_final_2
                 if (_cooldowntimer >= 0)
                 { 
                     _cooldowntimer--;
-                    _zombiecount++;
                 }
 
                 MouseState currentMouseState = Mouse.GetState();
@@ -55,13 +53,11 @@ namespace GME1011_final_2
                         _remove = true;
                     }
                 }
-
             }
-           
-            
         }
 
         
+
         public void Draw(SpriteBatch spriteBatch,SpriteFont font)
         {
             if (_remove)
@@ -95,11 +91,14 @@ namespace GME1011_final_2
         }
 
         public float GetX()
-            { return _position.X; }
+        { 
+            return _position.X; 
+        }
 
-
-
-
+        public bool HasCounted()
+        {
+            return _position.X <= 1400 && _position.X >= 1400;
+        }
 
 
 
